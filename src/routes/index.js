@@ -6,7 +6,7 @@ const mysqlConnection = require("../database");
 //  MAIN ROUTE
 router.get("/", (req, res) => {
   const data = {
-    data: "API developev by Angelo Contreras",
+    data: "API developed by Angelo Contreras - Github: @AngeloContrera5",
   };
   res.json(data);
 });
