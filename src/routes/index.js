@@ -5,67 +5,87 @@ const mysqlConnection = require("../database");
 
 //  MAIN ROUTE
 router.get("/", (req, res) => {
-  const data = {
-    data: "API developed by Angelo Contreras - Github: @AngeloContrera5",
-  };
-  res.json(data);
+  try {
+    const data = {
+      data: "API developed by Angelo Contreras - Github: @AngeloContrera5",
+    };
+    res.json(data);
+  } finally {
+    mysqlConnection.destroy();
+  }
 });
 
 //  words
 
 router.get("/words", (req, res) => {
-  mysqlConnection.query("SELECT * FROM tb_words", (err, rows, fields) => {
-    if (!err) {
-      res.json(rows);
-    } else {
-      console.log(err);
-    }
-  });
-});
-
-router.get("/words/:id", (req, res) => {
-  const { id } = req.params;
-  mysqlConnection.query(
-    "SELECT * FROM tb_words WHERE id_word = ?",
-    [id],
-    (err, rows, fields) => {
+  try {
+    mysqlConnection.query("SELECT * FROM tb_words", (err, rows, fields) => {
       if (!err) {
-        res.json(rows[0]);
+        res.json(rows);
       } else {
         console.log(err);
       }
-    }
-  );
+    });
+  } finally {
+    mysqlConnection.destroy();
+  }
+});
+
+router.get("/words/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    mysqlConnection.query(
+      "SELECT * FROM tb_words WHERE id_word = ?",
+      [id],
+      (err, rows, fields) => {
+        if (!err) {
+          res.json(rows[0]);
+        } else {
+          console.log(err);
+        }
+      }
+    );
+  } finally {
+    mysqlConnection.destroy();
+  }
 });
 
 //  words in english
 
 router.get("/wordsEng", (req, res) => {
-  mysqlConnection.query(
-    "SELECT words_eng FROM tb_words",
-    (err, rows, fields) => {
-      if (!err) {
-        res.json(rows);
-      } else {
-        console.log(err);
+  try {
+    mysqlConnection.query(
+      "SELECT words_eng FROM tb_words",
+      (err, rows, fields) => {
+        if (!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
       }
-    }
-  );
+    );
+  } finally {
+    mysqlConnection.destroy();
+  }
 });
 
 //  words in spanish
 
 router.get("/wordsEsp", (req, res) => {
-  mysqlConnection.query(
-    "SELECT words_esp FROM tb_words",
-    (err, rows, fields) => {
-      if (!err) {
-        res.json(rows);
-      } else {
-        console.log(err);
+  try {
+    mysqlConnection.query(
+      "SELECT words_esp FROM tb_words",
+      (err, rows, fields) => {
+        if (!err) {
+          res.json(rows);
+        } else {
+          console.log(err);
+        }
       }
-    }
-  );
+    );
+  } finally {
+    mysqlConnection.destroy();
+  }
 });
 
 module.exports = router;
