@@ -1,10 +1,13 @@
-require("dotenv").config();
+const path = require("path");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: path.join(__dirname, "./.env") });
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
 //  settings
-app.set("port", 3000);
+app.set("port", process.env.PORT);
 app.set("json spaces", 2);
 
 //  middlewares
