@@ -13,12 +13,16 @@ const mysqlConnection = mysql.createConnection({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
+
+  /*  host: "localhost",
+  user: "root",
+  password: "mysql",
+  database: "your_daily_words_db", */
 });
 
 mysqlConnection.connect(function (err) {
   if (err) {
     console.log(err);
-
     return;
   } else {
     console.log("DB is connected");
