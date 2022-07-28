@@ -24,6 +24,7 @@ router.get("/words", (req, res) => {
         res.json(rows);
       } else {
         console.log(err);
+        mysqlConnection.destroy();
       }
     });
   } finally {
@@ -42,6 +43,7 @@ router.get("/words/:id", (req, res) => {
           res.json(rows[0]);
         } else {
           console.log(err);
+          mysqlConnection.destroy();
         }
       }
     );
@@ -61,6 +63,7 @@ router.get("/wordsEng", (req, res) => {
           res.json(rows);
         } else {
           console.log(err);
+          mysqlConnection.destroy();
         }
       }
     );
@@ -80,6 +83,7 @@ router.get("/wordsEsp", (req, res) => {
           res.json(rows);
         } else {
           console.log(err);
+          mysqlConnection.destroy();
         }
       }
     );
